@@ -20,7 +20,7 @@ export function toggleUserSound() {
         audioElement.play().catch(() => {});
     }
 
-    return !state.audio.userMuted; // vraća true = zvuk uključen
+    return !state.audio.userMuted;
 }
 
 // Promjena zvuka
@@ -57,7 +57,6 @@ function handleWeather() {
         return;
     }
 
-    // Ako nema kiše ni snijega → vrati normalne zvukove
     if (!state.audio.frogsActive) {
         changeSound(sounds.ptice);
     }
