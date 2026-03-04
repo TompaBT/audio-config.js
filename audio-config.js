@@ -12,7 +12,7 @@ export const city = "Baranja";
 
 export const sounds = {
     zabe: "https://raw.githubusercontent.com/TompaBT/baranja-audio/main/Zvuk%20zabe.mp3",
-    cvrčak: "https://raw.githubusercontent.com/TompaBT/baranja-audio/main/cvrcak.mp3",
+    cvrcak: "https://raw.githubusercontent.com/TompaBT/baranja-audio/main/cvrcak.mp3",
     nocni: "https://raw.githubusercontent.com/TompaBT/baranja-audio/main/noc-zvono-lavez.mp3",
     pijetao: "https://raw.githubusercontent.com/TompaBT/baranja-audio/main/pijetao-jutro.mp3",
     grmljavina: "https://raw.githubusercontent.com/TompaBT/baranja-audio/main/grmljavina.mp3",
@@ -28,7 +28,7 @@ export const sounds = {
 
 export const state = {
     weather: {
-        condition: null,   // rain, snow, thunderstorm, clear, clouds...
+        condition: null,
         temperature: null,
         lastRainTime: null,
         isRaining: false,
@@ -36,11 +36,11 @@ export const state = {
     },
 
     audio: {
-        current: null,      // trenutno aktivni zvuk
-        lastNormal: null,   // zvuk koji se vraća nakon žaba ili pijetla
-        frogsTimer: null,   // timer za žabe (3 min)
+        current: null,
+        lastNormal: null,
+        frogsTimer: null,
         frogsActive: false,
-        userMuted: false    // korisnik isključio zvuk
+        userMuted: false
     },
 
     time: {
@@ -80,11 +80,11 @@ export function changeSound(audioElement, newSound) {
 }
 
 // ===============================
-//  FUNKCIJA ZA POKRETANJE ŽABA
+//  FUNKCIJA ZA POKRETANJE ZABA
 // ===============================
 
 export function startFrogs(audioElement) {
-    if (state.time.season === "winter") return; // zimi nema žaba
+    if (state.time.season === "winter") return;
 
     state.audio.frogsActive = true;
     state.audio.lastNormal = state.audio.current;
@@ -98,5 +98,5 @@ export function startFrogs(audioElement) {
         if (state.audio.lastNormal) {
             changeSound(audioElement, state.audio.lastNormal);
         }
-    }, 3 * 60 * 1000); // 3 minute
+    }, 3 * 60 * 1000);
 }
