@@ -10,6 +10,19 @@ import { updateTime, checkTimeEvents } from "./time.js";
 export const audioElement = new Audio();
 audioElement.loop = true;
 
+// Uključivanje / isključivanje zvuka
+export function toggleUserSound() {
+    state.audio.userMuted = !state.audio.userMuted;
+
+    if (state.audio.userMuted) {
+        audioElement.pause();
+    } else {
+        audioElement.play().catch(() => {});
+    }
+
+    return !state.audio.userMuted; // vraća true = zvuk uključen
+}
+
 // Promjena zvuka
 export function changeSound(newSound) {
     if (state.audio.current === newSound) return;
