@@ -1,4 +1,3 @@
-
 import { apiKey, city, state } from "./audio-config.js";
 
 // ===============================
