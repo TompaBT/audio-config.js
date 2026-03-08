@@ -1,10 +1,10 @@
-// ===============================
+Manastir// ===============================
 //  AUDIO CONFIG – MODUL 1
 // ===============================
 
 // API PODACI
 export const apiKey = "50db5deb66c63d90e697c5762aedc2e5";
-export const city = "Baranja";
+export const city = "Beli Manastir";
 
 // ===============================
 //  LINKOVI ZVUKOVA
