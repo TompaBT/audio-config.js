@@ -1,10 +1,8 @@
 import { state } from "./audio-config.js";
 
 export function startClockUI() {
-    function updateClock() {
-        const el = document.getElementById("clockBox");
-        if (!el) return;
 
+    function updateClock() {
         const h = String(state.time.hour).padStart(2, "0");
         const m = String(state.time.minute).padStart(2, "0");
 
@@ -12,7 +10,11 @@ export function startClockUI() {
         const mo = state.time.month;
         const season = state.time.season;
 
-        el.innerHTML = `${d}.${mo}. — ${h}:${m}<br>Sezona: ${season}`;
+        // Datum + vrijeme
+        document.getElementById("date").textContent = `${d}.${mo}. — ${h}:${m}`;
+
+        // Sezona
+        document.getElementById("season").textContent = season;
     }
 
     updateClock();
