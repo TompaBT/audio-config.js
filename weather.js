@@ -1,4 +1,4 @@
-import { apiKey, city, state } from "./audio-config.js";
+import { apiKey, lat, lon, state } from "./audio-config.js";
 
 // ===============================
 //  WEATHER – MODUL 2
@@ -8,7 +8,7 @@ import { apiKey, city, state } from "./audio-config.js";
 export async function fetchWeather() {
     try {
         const url =
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=hr`;
+            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=hr`;
 
         const response = await fetch(url);
         const data = await response.json();
