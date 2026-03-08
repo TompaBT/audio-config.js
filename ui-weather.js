@@ -51,6 +51,13 @@ export function startWeatherUI() {
 
         document.getElementById("season").textContent = prijevodSezona[season] || season;
         document.getElementById("seasonIcon").textContent = ikoneSezona[season] || "";
+
+        // ⭐ AUTOMATSKA PROMJENA BOJE OKVIRA PO SEZONI
+        const box = document.querySelector(".weather-box");
+        if (box) {
+            box.classList.remove("winter", "spring", "summer", "autumn");
+            box.classList.add(season);
+        }
     }
 
     updateUI();
