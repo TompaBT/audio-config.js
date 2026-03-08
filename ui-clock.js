@@ -8,13 +8,8 @@ export function startClockUI() {
 
         const d = state.time.day;
         const mo = state.time.month;
-        const season = state.time.season;
 
-        // Datum + vrijeme
         document.getElementById("date").textContent = `${d}.${mo}. — ${h}:${m}`;
-
-        // Sezona
-        document.getElementById("season").textContent = season;
     }
 
     updateClock();
