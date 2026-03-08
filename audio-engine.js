@@ -71,3 +71,11 @@ export function startAudioEngine() {
         checkTimeEvents(audioElement, sounds, changeSound);
     }, 5000);
 }
+
+// ===============================
+//  AUTO-START ZVUKA NA BILO KOJI KLIK
+// ===============================
+
+document.addEventListener("click", () => {
+    startAudioEngine();
+}, { once: true });
