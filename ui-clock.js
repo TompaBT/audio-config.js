@@ -4,7 +4,6 @@ import { state } from "./audio-config.js";
 //  HRVATSKI DRŽAVNI PRAZNICI
 // ===============================
 
-// Fiksni praznici (dan-mjesec)
 const fixedHolidays = [
     "1-1",   // Nova godina
     "1-6",   // Sveta tri kralja
@@ -19,7 +18,7 @@ const fixedHolidays = [
     "12-26"  // Sveti Stjepan
 ];
 
-// Izračun Uskrsa (algoritam)
+// Izračun Uskrsa
 function getEasterDate(year) {
     const f = Math.floor;
     const G = year % 19;
@@ -33,29 +32,23 @@ function getEasterDate(year) {
     return { day, month };
 }
 
-// Određivanje boje datuma
+// Određivanje boje
 function getDateColor(day, month, year) {
     const date = new Date(year, month - 1, day);
     const dayOfWeek = date.getDay(); // 0 = nedjelja, 6 = subota
 
-    // Nedjelja = crveno
-    if (dayOfWeek === 0) return "red";
+    if (dayOfWeek === 0) return "red";   // nedjelja
+    if (dayOfWeek === 6) return "blue";  // subota
 
-    // Subota = plavo
-    if (dayOfWeek === 6) return "blue";
-
-    // Fiksni praznici = zeleno
     const key = `${day}-${month}`;
     if (fixedHolidays.includes(key)) return "green";
 
-    // Uskrs i Uskrsni ponedjeljak
     const easter = getEasterDate(year);
     const easterMonday = new Date(year, easter.month - 1, easter.day + 1);
 
     if (day === easter.day && month === easter.month) return "green";
     if (day === easterMonday.getDate() && month === easterMonday.getMonth() + 1) return "green";
 
-    // Ostali dani = bijelo
     return "white";
 }
 
@@ -66,22 +59,22 @@ function getDateColor(day, month, year) {
 export function startClockUI() {
 
     function updateClock() {
-        const h = String(state.time.hour).padStart(2, "0");
-        const m = String(state.time.minute).padStart(2, "0");
+        const now = new Date();
 
-        const d = state.time.day;
-        const mo = state.time.month;
-        const year = new Date().getFullYear();
+        const h = String(now.getHours()).padStart(2, "0");
+        const m = String(now.getMinutes()).padStart(2, "0");
+
+        const d = now.getDate();
+        const mo = now.getMonth() + 1;
+        const year = now.getFullYear();
 
         const dateElement = document.getElementById("date");
 
-        // Postavljanje teksta
         dateElement.textContent = `${d}.${mo}. — ${h}:${m}`;
-
-        // Postavljanje boje
         dateElement.style.color = getDateColor(d, mo, year);
     }
 
     updateClock();
     setInterval(updateClock, 1000);
 }
+
