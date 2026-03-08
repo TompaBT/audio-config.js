@@ -1,5 +1,3 @@
-import { state } from "./audio-config.js";
-
 // ===============================
 //  HRVATSKI DRŽAVNI PRAZNICI
 // ===============================
@@ -77,4 +75,3 @@ export function startClockUI() {
     updateClock();
     setInterval(updateClock, 1000);
 }
-
