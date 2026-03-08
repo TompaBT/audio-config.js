@@ -2,7 +2,7 @@ import { state } from "./audio-config.js";
 
 export function startWeatherUI() {
 
-    const ikone = {
+    const ikoneVrijeme = {
         clear: "☀️",
         clouds: "☁️",
         rain: "🌧️",
@@ -24,6 +24,20 @@ export function startWeatherUI() {
         thunderstorm: "grmljavina"
     };
 
+    const ikoneSezona = {
+        winter: "❄️",
+        spring: "🌸",
+        summer: "☀️",
+        autumn: "🍂"
+    };
+
+    const prijevodSezona = {
+        winter: "zima",
+        spring: "proljeće",
+        summer: "ljeto",
+        autumn: "jesen"
+    };
+
     function updateUI() {
         const temp = state.weather.temperature;
         const cond = state.weather.condition;
@@ -33,8 +47,10 @@ export function startWeatherUI() {
 
         document.getElementById("temp").textContent = temp;
         document.getElementById("weather").textContent = prijevodVrijeme[cond] || cond;
-        document.getElementById("season").textContent = season;
-        document.getElementById("weatherIcon").textContent = ikone[cond] || "🌤️";
+        document.getElementById("weatherIcon").textContent = ikoneVrijeme[cond] || "🌤️";
+
+        document.getElementById("season").textContent = prijevodSezona[season] || season;
+        document.getElementById("seasonIcon").textContent = ikoneSezona[season] || "";
     }
 
     updateUI();
