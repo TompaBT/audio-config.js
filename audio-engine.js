@@ -10,6 +10,10 @@ import { updateTime, checkTimeEvents } from "./time.js";
 export const audioElement = new Audio();
 audioElement.loop = true;
 
+// ⭐ MOBITEL FIX – mora imati početni zvuk prije prvog play()
+audioElement.src = sounds.ptice;
+audioElement.currentTime = 0;
+
 // Uključivanje / isključivanje zvuka
 export function toggleUserSound() {
     state.audio.userMuted = !state.audio.userMuted;
@@ -90,4 +94,3 @@ window.addEventListener("click", () => {
     audioElement.play().catch(() => {});
     startAudioEngine();
 }, { once: true });
-
