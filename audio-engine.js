@@ -14,6 +14,11 @@ audioElement.loop = true;
 audioElement.src = sounds.ptice;
 audioElement.currentTime = 0;
 
+
+// ⭐ MOBITEL FIX – mora imati početni zvuk prije prvog play()
+audioElement.src = sounds.ptice;
+audioElement.currentTime = 0;
+
 // Uključivanje / isključivanje zvuka
 export function toggleUserSound() {
     state.audio.userMuted = !state.audio.userMuted;
