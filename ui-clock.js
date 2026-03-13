@@ -30,7 +30,7 @@ function getEasterDate(year) {
     return { day, month };
 }
 
-// Određivanje boje
+// Određivanje boje datuma
 function getDateColor(day, month, year) {
     const date = new Date(year, month - 1, day);
     const dayOfWeek = date.getDay(); // 0 = nedjelja, 6 = subota
@@ -51,27 +51,39 @@ function getDateColor(day, month, year) {
 }
 
 // ===============================
-//  UI CLOCK
+//  BING STYLE CLOCK UI
 // ===============================
 
 export function startClockUI() {
-
-    function updateClock() {
-        const now = new Date();
-
-        const h = String(now.getHours()).padStart(2, "0");
-        const m = String(now.getMinutes()).padStart(2, "0");
-
-        const d = now.getDate();
-        const mo = now.getMonth() + 1;
-        const year = now.getFullYear();
-
-        const dateElement = document.getElementById("date");
-
-        dateElement.textContent = `${d}.${mo}. — ${h}:${m}`;
-        dateElement.style.color = getDateColor(d, mo, year);
-    }
-
     updateClock();
     setInterval(updateClock, 1000);
+}
+
+function updateClock() {
+    const now = new Date();
+
+    const hh = String(now.getHours()).padStart(2, "0");
+    const mm = String(now.getMinutes()).padStart(2, "0");
+
+    const day = now.getDate();
+    const month = now.getMonth() + 1;
+    const year = now.getFullYear();
+
+    const days = ["Nedjelja","Ponedjeljak","Utorak","Srijeda","Četvrtak","Petak","Subota"];
+    const months = ["Siječnja","Veljače","Ožujka","Travnja","Svibnja","Lipnja","Srpnja","Kolovoza","Rujna","Listopada","Studenoga","Prosinca"];
+
+    // Bing style elementi
+    const timeEl = document.querySelector(".clock-time");
+    const dateEl = document.querySelector(".clock-date");
+
+    // Vrijeme
+    timeEl.textContent = `${hh}:${mm}`;
+
+    // Datum
+    dateEl.textContent = `${days[now.getDay()]}, ${day}. ${months[now.getMonth()]} ${year}.`;
+
+    // Boja datuma (tvoja logika)
+    dateEl.style.color = getDateColor(day, month, year);
+}
+
 }
