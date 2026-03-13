@@ -64,6 +64,9 @@ function handleWeather() {
 
 // Glavna petlja zvuka
 export function startAudioEngine() {
+    if (state.audio.engineStarted) return;  // sprječava duplo pokretanje
+    state.audio.engineStarted = true;
+
     setInterval(() => {
         updateTime();
         fetchWeather();
@@ -73,9 +76,18 @@ export function startAudioEngine() {
 }
 
 // ===============================
-//  AUTO-START ZVUKA NA BILO KOJI KLIK
+//  MOBITEL / DESKTOP – OTKLJUČAVANJE ZVUKA
 // ===============================
 
-document.addEventListener("click", () => {
+// 1) Prvi dodir ekrana (iPhone + Android)
+window.addEventListener("touchstart", () => {
+    audioElement.play().catch(() => {});
     startAudioEngine();
 }, { once: true });
+
+// 2) Prvi klik (desktop + Android Chrome)
+window.addEventListener("click", () => {
+    audioElement.play().catch(() => {});
+    startAudioEngine();
+}, { once: true });
+
