@@ -76,14 +76,14 @@ function updateClock() {
     const timeEl = document.querySelector(".clock-time");
     const dateEl = document.querySelector(".clock-date");
 
+    if (!timeEl || !dateEl) return;
+
     // Vrijeme
     timeEl.textContent = `${hh}:${mm}`;
 
     // Datum
     dateEl.textContent = `${days[now.getDay()]}, ${day}. ${months[now.getMonth()]} ${year}.`;
 
-    // Boja datuma (tvoja logika)
+    // Boja datuma
     dateEl.style.color = getDateColor(day, month, year);
-}
-
 }
