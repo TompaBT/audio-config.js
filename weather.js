@@ -1,10 +1,8 @@
 import { apiKey, lat, lon, state } from "./audio-config.js";
 
 // ===============================
-//  WEATHER – MODUL 2
+//  DOHVAT TRENUTNOG VREMENA
 // ===============================
-
-// Dohvat vremena iz OpenWeather API-ja
 export async function fetchWeather() {
     try {
         const url =
@@ -21,7 +19,7 @@ export async function fetchWeather() {
         state.weather.temperature = temperature;
         state.weather.condition = condition;
 
-        // Kiša
+        // Kiša logika
         if (condition.includes("rain")) {
             state.weather.wasRaining = state.weather.isRaining;
             state.weather.isRaining = true;
@@ -36,8 +34,34 @@ export async function fetchWeather() {
     }
 }
 
-// Automatsko osvježavanje svakih 60 sekundi
+// ===============================
+//  DOHVAT 5-DNEVNE PROGNOZE
+// ===============================
+export async function fetchForecast() {
+    try {
+        const url =
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=hr`;
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (!data || !data.list) return;
+
+        // Spremamo forecast u state
+        state.weather.forecastData = data;
+
+    } catch (error) {
+        console.error("Greška pri dohvaćanju prognoze:", error);
+    }
+}
+
+// ===============================
+//  AUTOMATSKO OSVJEŽAVANJE
+// ===============================
 export function startWeatherLoop() {
     fetchWeather();
+    fetchForecast(); // ← DODANO
+
     setInterval(fetchWeather, 60 * 1000);
+    setInterval(fetchForecast, 60 * 1000 * 10); // forecast svakih 10 min
 }
