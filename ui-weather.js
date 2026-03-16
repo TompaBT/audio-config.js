@@ -69,8 +69,8 @@ function updateUI() {
     // Opis vremena
     descEl.textContent = prijevodVrijeme[cond] || cond;
 
-    // Lokacija (fiksno ili možeš staviti state.time.location)
-    locEl.textContent = "Beli Manastir";
+    // Lokacija – uvijek prikazujemo Baranja
+    locationEl.textContent = "Baranja";
 
     // Dodatne informacije
     extraEl.textContent = `${prijevodSezona[season]} ${ikoneSezona[season]}`;
