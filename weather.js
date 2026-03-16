@@ -60,8 +60,8 @@ export async function fetchForecast() {
 // ===============================
 export function startWeatherLoop() {
     fetchWeather();
-    fetchForecast(); // ← DODANO
+    fetchForecast(); // dohvat prognoze odmah
 
-    setInterval(fetchWeather, 60 * 1000);
-    setInterval(fetchForecast, 60 * 1000 * 10); // forecast svakih 10 min
+    setInterval(fetchWeather, 60 * 1000);      // svake minute
+    setInterval(fetchForecast, 10 * 60 * 1000); // svakih 10 minuta
 }
