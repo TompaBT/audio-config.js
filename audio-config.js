@@ -3,7 +3,7 @@
 // ===============================
 
 // API PODACI
-export const apiKey = "50db5deb66c63d90e697c5762aedc2e5";
+export const apiKey = "";
 
 // Precizne koordinate Belog Manastira
 export const lat = 45.77;
